@@ -23,7 +23,7 @@ Expensive hardware with lots of processing in a pipeline means you likely have f
 
 TODO:  Advertise for interested UFO/UAP enthusiasts who have computers and are willing to buy some thermal cams.
 
-For this project, I am using Ubuntu 22.04 and Python version > 3.10.  If you go through my commits you'll see a bunch adding newlines just to get github to show the text file from Linux correctly.  It's VERY unfriendly as a process switching between Linux line endings to github's text file view.  However, coding anything on Windows to me is like having a hand tied behind my back and I don't like Microsoft's way of doing things.
+For this project, I am using Ubuntu 22.04 and Python version > 3.10.  If you go through my commits you'll see a bunch adding newlines just to get github to show the text file from Linux correctly.  It's VERY unfriendly as a process switching between Linux line endings to github's text file view.  However, coding anything on Windows to me is like having a hand tied behind my back and I don't like Microsoft's way of doing things (specifically, they have a non-existent respect for boundaries, maliciously gather telemtry from all their software, update during user work, are bound directly in with government systems manned by people without a respect for their own constitution, etc).
 
 ------------------------
 
