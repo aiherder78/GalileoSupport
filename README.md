@@ -23,7 +23,7 @@ The Galileo folks think this is infeasible, so if it works I'm just going to cas
 
 TODO:  Advertise for interested UFO/UAP enthusiasts who have computers and are willing to buy some thermal cams.
 
-For this project, I am using Ubuntu 22.04 and Python version > 3.10.
+For this project, I am using Ubuntu 22.04 and Python version > 3.10.  If you go through my commits you'll see a bunch adding newlines just to get github to show the text file from Linux correctly.  It's VERY unfriendly as a process switching between Linux line endings to github's text file view.  However, coding anything on Windows to me is like having a hand tied behind my back and I don't like Microsoft's way of doing things.
 
 ------------------------
 
