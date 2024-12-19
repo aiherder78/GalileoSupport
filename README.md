@@ -71,13 +71,13 @@ Theta angle (azimuth) is the angle from 0 degrees (north).
 
 Phi angle (elevation) is the angle from 0 degrees (straight up, or in the video, the Z axis direction).
 
-Here's how you get the x, y, z parameters for the local coordinates used by the Stellarium http API.  Remember, if you do not set the Stellarium "observer" location/ground position, it is by default in Paris, France.
+Here's how you get the x, y, z parameters for the local coordinates used by the Stellarium http API.  If you don't set it, in Stellarium your location will be whatever the Stellarium default is of course, and I saw another Youtube video stating the time for the observer would be your computer's current time.
 
+~~~
 x=cos(altitude)⋅cos(azimuth)
-
 y=cos(altitude)⋅sin(azimuth)
-
 z=sin(altitude)
+~~~
 
 Without further ado, here's a basic Python script:
 ~~~
@@ -94,13 +94,13 @@ print("View set:", response.status_code)
 
 If you have Stellarium's view client running in another window, your Stellarium observer camera should have jerked to the new given vector direction.
 Note:  That researcher with the CNN training Stellarium feedback loop had installed Stellarium "headless" and controlled it all with scripts.  I'm going to initially try to do this interactively / not headless.
-------------------
+
 Here's a short Python script and curl command to use the Stellarium http API to set the observer location:
 
 Curl command:
-
+~~~
 curl -d "latitude=34.0522" -d "longitude=-118.2437" -d "altitude=100" http://localhost:8090/api/location/setlocationfields
-
+~~~
 Python program:
 ~~~
 import requests
