@@ -39,17 +39,32 @@ Installing Stellarium, starting it and accessing the http server API (to test wi
 (No, I never remember everything and in this case have never used Stellarium before - I have just read a ton about it and here's my question to Perplexity for these instructions:
 "While I'm waiting for the camera to arrive (and getting ready to order the other one), I need to setup the web server to get http API functionality with Stellarium.  Do you know the steps for that on Ubuntu?" - in this case I'm moving toward duplicating the steps to get training images from Stellarium for training a CNN...and yeah, I have already ordered the P2 Pro / included Kevin's referral ID on the order link).
 
-From the Ubuntu terminal (ctrl-alt-t):  (added by me since I like to get extremely detailed in steps)
+From the Ubuntu terminal (ctrl-alt-t):  (added by me since I like to get extremely detailed in steps - from this point, all commands are assumed to be simply typed in the terminal, then press enter)
 
-sudo apt-get install stellarium-qt6
+Add the official Stellarium repository and update the apt catalogue to reflect its contents (two terminal commands):
+~~~
+sudo add-apt-repository ppa:stellarium/stellarium-releases
+sudo apt update
+~~~
+Install Stellarium and make sure it's installed by issuing a command to see its version (two terminal commands):
+~~~
+sudo apt install stellarium
+stellarium --version
+~~~
+Command to run stellarium:
+~~~
+stellarium
+~~~
+On my computer with the version it installed from the official repo (version 24.3), it detected my location to my local town and also updated the time in the program / view to my computer's / local time.  The view essentially matches what I see outside except for the fact that it's a slightly different location than the default location Stellarium uses for my town.  Since it has some kind of likely satellite data for buildings, I could likely give it an exact latitude/longitude pair and see something fairly close to my nearby buildings.
 
-Launch Stellarium and navigate to Configuration > Tools > Plugins.
-Configure the plugin settings:
-  Set the desired port number (default is 8090)
-  Choose whether to allow connections from other machines
-Restart Stellarium for the changes to take effect.
-Access the HTTP API by opening a web browser and navigating to:
-  http://localhost:8090/api/main/status
+To install the RemoteControl plugin to Stellarium:
+From within Stellarium, move the mouse cursor to the bottom left of the screen.  Two transparent bars will come up, one across the bottom, and another that goes a little way up on the left.  Move the mouse cursor up the side bar that goes up on the left side of the screen.  Click on the "Configuration Menu (F2)".  This is somewhat not-descriptive because what you'll get by clicking that is NOT what you get by pressing F2.  Pressing F2 gives you a much less functional version that has nothing you can directly change.
+From within the menu window that pops up when you click on the sidebar config icon with the mouse, go to the Plugins tab.  Find "Remote Control" in the list and click on the "load at startup" checkbox.  Then click on the "configure" button to the right of that checkbox.  Check the "server enabled" and the "enable automatically at startup" checkbox.  This will turn the server on and always do it every time you start Stellarium.  The server turned on for me as soon as I clicked the "enable server" checkbox because the below url wasn't responding, but when I clicked it, the browser reloaded to Stellarium's http server webpage.
+http://localhost:8090
+
+You can also see a more simple / json list of Stellarium http server API status information at:
+http://localhost:8090/api/main/status
+  
 Replace "localhost" with your machine's IP address if accessing from another device.
 You can now use HTTP GET requests to control Stellarium remotely. For example:
   http://localhost:8090/api/main/focus?target=Mars
