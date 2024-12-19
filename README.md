@@ -21,11 +21,16 @@ None of this was immediate, it was a long series of questions submitted to Perpl
 
 The Galileo folks think this is infeasible, so if it works I'm just going to casually introduce it in a meeting and hopefully after they find out there are tons of people submitting data sightings using it.  Expensive hardware with lots of processing in a pipeline means you likely have few monitored points, while there's a massive number of UFO/UAP enthusiasts worldwide and I bet a ton of them have computers.  If you have a systematic and collaborative network using a high level of authoritative knowledge and SLAM / thermal in an autonomous fashion, probably the only thing else you'd need would be some blockchain.  Most earlier government attempts at explanations like swamp gas or everything being "Venus" wouldn't get close to being believable as the software would have already filtered known objects and likely (depending on distance) have quite a bit more data on position, velocity, shape, and heat emission levels of any given object.  If we combine that with realtime ADS-B (Automatic Dependent Surveillance-Broadcast) from the net, then we'd also filter out known aircraft (and potentially drone as well) transponders, at least those going by the rules.
 
+TODO:  Advertise for interested UFO/UAP enthusiasts who have computers and are willing to buy some thermal cams.
+
 For this project, I am using Ubuntu 22.04 and Python version > 3.10.
 
 ------------------------
+
 TODO:  Include instructions for setting up a Python virtualenv
+
 TODO:  Include a requirements file for pip install (this will get bigger as I go)
+
 TODO:  Keep updating the requirements file as I have further required Python modules with more project updates
 
 Instructions / Steps:
