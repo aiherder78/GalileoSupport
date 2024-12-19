@@ -1,5 +1,5 @@
 # GalileoSupport
-Searching the skies for anomalies - filtering out stars with the help of Stellarium and/or CNNs trained by its data
+Searching the skies for anomalies - filtering out stars with the help of Stellarium and/or CNNs trained by its data (and using open source SLAM on thermal data to get relative position of heat-generating nearby flying objects).
 
 For this project, I am using Perplexity.ai intensively in order to get over obstacles and answer questions.  I am a complete newbie to astronomy, but in trying to find a way to help the project, I think it would be a good idea to have an authoritative basis to filter out stars, planets, and potentially known meteorites.  While doing research with Perplexity, I mentioned that I'd seen papers where satellites used convolutional neural nets (CNNs) to help determine their position in orbit and that I'd like to do the same thing in order to filter out stars in the night sky (in order to lower uncertainty that something is or is not an unknown craft).
 
