@@ -18,6 +18,10 @@ The Galileo folks think this is infeasible, so if it works I'm just going to cas
 For this project, I am using Ubuntu 22.04 and Python version > 3.10.
 
 ------------------------
+TODO:  Include instructions for setting up a Python virtualenv
+TODO:  Include a requirements file for pip install (this will get bigger as I go)
+TODO:  Keep updating the requirements file as I have further required Python modules with more project updates
+
 Instructions / Steps:
 
 Installing Stellarium, starting it and accessing the http server API (to test with the browser):
@@ -35,6 +39,16 @@ Configure the plugin settings:
 Restart Stellarium for the changes to take effect.
 Access the HTTP API by opening a web browser and navigating to:
   http://localhost:8090/api/main/status
+Replace "localhost" with your machine's IP address if accessing from another device.
+You can now use HTTP GET requests to control Stellarium remotely. For example:
+  http://localhost:8090/api/main/focus?target=Mars
 
+Remember to check Stellarium's documentation for a full list of available API commands and their usage.
+(Thanks Perplexity, but I'm asking you first anyway...I'll check the documentation if something still doesn't work or if I need to double check if something might be available that you didn't mention)
 
+TODO:  Include any needed Stellarium config files / location in this project's repo after I add them
+
+---------------
+Setting up a basic Python script to access data:
+(TODO:  Include this first Python script file name / location in this project repo after I add it)
 
