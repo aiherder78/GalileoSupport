@@ -1,4 +1,3 @@
-```
 # GalileoSupport
 Searching the skies for anomalies - filtering out stars with the help of Stellarium and/or CNNs trained by its data (and using open source SLAM on thermal data to get relative position of heat-generating nearby flying objects).
 
@@ -135,4 +134,3 @@ TODO:  Include any needed Stellarium config files / location in this project's r
 Setting up a basic Python script to access data:
 
 (TODO:  Include this first Python script file name / location in this project repo after I add it)
-```
