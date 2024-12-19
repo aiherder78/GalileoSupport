@@ -22,7 +22,7 @@ Instructions / Steps:
 
 Installing Stellarium, starting it and accessing the http server API (to test with the browser):
 (No, I never remember everything and in this case have never used Stellarium before - I have just read a ton about it and here's my question to Perplexity for these instructions:
-"While I'm waiting for the camera to arrive (and getting ready to order the other one), I need to setup the web server to get http API functionality with Stellarium.  Do you know the steps for that on Ubuntu?" - in this case I'm moving toward duplicating the steps to get training images from Stellarium for training a CNN)
+"While I'm waiting for the camera to arrive (and getting ready to order the other one), I need to setup the web server to get http API functionality with Stellarium.  Do you know the steps for that on Ubuntu?" - in this case I'm moving toward duplicating the steps to get training images from Stellarium for training a CNN...and yeah, I have already ordered the P2 Pro / included Kevin's referral ID on the order link).
 
 From the Ubuntu terminal (ctrl-alt-t):  (added by me since I like to get extremely detailed in steps)
 
