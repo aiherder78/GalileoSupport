@@ -21,4 +21,20 @@ For this project, I am using Ubuntu 22.04 and Python version > 3.10.
 Instructions / Steps:
 
 Installing Stellarium, starting it and accessing the http server API (to test with the browser):
-From the Ubuntu terminal (ctrl-alt-t):  sudo apt-get install stellarium-qt6
+(No, I never remember everything and in this case have never used Stellarium before - I have just read a ton about it and here's my question to Perplexity for these instructions:
+"While I'm waiting for the camera to arrive (and getting ready to order the other one), I need to setup the web server to get http API functionality with Stellarium.  Do you know the steps for that on Ubuntu?" - in this case I'm moving toward duplicating the steps to get training images from Stellarium for training a CNN)
+
+From the Ubuntu terminal (ctrl-alt-t):  (added by me since I like to get extremely detailed in steps)
+
+sudo apt-get install stellarium-qt6
+
+Launch Stellarium and navigate to Configuration > Tools > Plugins.
+Configure the plugin settings:
+  Set the desired port number (default is 8090)
+  Choose whether to allow connections from other machines
+Restart Stellarium for the changes to take effect.
+Access the HTTP API by opening a web browser and navigating to:
+  http://localhost:8090/api/main/status
+
+
+
