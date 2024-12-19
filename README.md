@@ -74,8 +74,9 @@ Phi angle (elevation) is the angle from 0 degrees (straight up, or in the video,
 Here's how you get the x, y, z parameters for the local coordinates used by the Stellarium http API.  Remember, if you do not set the Stellarium "observer" location/ground position, it is by default in Paris, France.
 
 x=cos(altitude)⋅cos(azimuth)
+
 y=cos(altitude)⋅sin(azimuth)
-y=cos(altitude)⋅sin(azimuth)
+
 z=sin(altitude)
 
 Without further ado, here's a basic Python script:
