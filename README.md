@@ -60,12 +60,19 @@ Note: Stellarium must be running (in this case on your localhost, if you put it 
 About the coordinates used by Stellarium's API (local coordinates):  
 https://www.youtube.com/watch?v=sT8JIn7Q_Fo
 (this section of the Perplexity session q/a files will be maddening - in my defense, I often stay up all night doing research and the spot where I didn't even notice it was already using the http API and kept asking question it had already answered, it was probably about 5am and I hadn't slept)
+
 Note:  Stellarium uses right ascension and Declination (from an origin at the "vernal equinox") elsewhere according to Perplexity, and the three local coordinates are also not altitude and azimuth angles - that video above may help explain the relationship - to convert altitude and azimuth angles to those three numbers:
+
 P (the line length to the arbitrary point mentioned in the video) is set to 1 (a unit sphere - the spot  on the unit sphere is wherever the light from any individual star goes through the imaginary unit sphere to reach your eye / the observer's camera).
+
 Using the terms from that youtube video link (theta and phi, which are the same as azimuth and elevation respectively):
+
 Theta angle (azimuth) is the angle from 0 degrees (north).
+
 Phi angle (elevation) is the angle from 0 degrees (straight up, or in the video, the Z axis direction).
+
 Here's how you get the x, y, z parameters for the local coordinates used by the Stellarium http API.  Remember, if you do not set the Stellarium "observer" location/ground position, it is by default in Paris, France.
+
 x=cos(altitude)⋅cos(azimuth)
 y=cos(altitude)⋅sin(azimuth)
 y=cos(altitude)⋅sin(azimuth)
