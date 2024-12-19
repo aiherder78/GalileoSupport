@@ -58,6 +58,7 @@ You can now use HTTP GET requests to control Stellarium remotely. For example:
 Your first simple view retrieval Python script:
 Note: Stellarium must be running (in this case on your localhost, if you put it on a server on the net, change localhost to the server's IP, etc).
 Stellarium API docs:  https://stellarium.org/doc/24.0/remoteControlApi.html
+
 About the coordinates used by Stellarium's API (local coordinates):  
 https://www.youtube.com/watch?v=sT8JIn7Q_Fo
 (this section of the Perplexity session q/a files will be maddening - in my defense, I often stay up all night doing research and the spot where I didn't even notice it was already using the http API and kept asking question it had already answered, it was probably about 5am and I hadn't slept)
