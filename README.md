@@ -84,7 +84,9 @@ Without further ado, here's a basic Python script:
 import requests
 
 url = "http://localhost:8090/api/main/view"
+
 params = {"altAz": "[0.0001,0,1]"}
+
 response = requests.post(url, data=params)
 
 print("View set:", response.status_code)
@@ -94,19 +96,26 @@ If you have Stellarium's view client running in another window, your Stellarium 
 Note:  That researcher with the CNN training Stellarium feedback loop had installed Stellarium "headless" and controlled it all with scripts.  I'm going to initially try to do this interactively / not headless.
 ------------------
 Here's a short Python script and curl command to use the Stellarium http API to set the observer location:
+
 Curl command:
+
 curl -d "latitude=34.0522" -d "longitude=-118.2437" -d "altitude=100" http://localhost:8090/api/location/setlocationfields
 
 Python program:
 ----------
+
 import requests
 
 # Define the base URL for the Stellarium API
+
 url_base = "http://localhost:8090/api/location/setlocationfields"
 
 # Function to set the location in Stellarium
+
 def set_location(latitude, longitude, altitude):
+
     # Prepare the data to be sent in the POST request
+    
     data = {
         'latitude': latitude,
         'longitude': longitude,
@@ -114,28 +123,41 @@ def set_location(latitude, longitude, altitude):
     }
     
     # Send the POST request to set the location
+    
     response = requests.post(url_base, data=data)
     
     # Check if the request was successful
+    
     if response.status_code == 200:
+    
         print("Location set successfully!")
+        
     else:
+    
         print(f"Failed to set location: {response.status_code}, {response.text}")
 
 # Example usage
+
 if __name__ == "__main__":
+
     # Set your desired latitude, longitude, and altitude
+    
     latitude = 34.0522  # Los Angeles latitude
+    
     longitude = -118.2437  # Los Angeles longitude
+    
     altitude = 100  # Altitude in meters
 
     # Call the function to set the location
+    
     set_location(latitude, longitude, altitude)
+    
 ----------
 
 TODO:  Include any needed Stellarium config files / location in this project's repo after I add them
 
 ---------------
+
 Setting up a basic Python script to access data:
 
 (TODO:  Include this first Python script file name / location in this project repo after I add it)
