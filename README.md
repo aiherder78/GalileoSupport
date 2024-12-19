@@ -16,6 +16,7 @@ This is the github repo for that researcher's project:
 https://github.com/gregtozzi/deep_learning_celnav
 
 Note:  You can see my question/answer sessions with Perplexity in the Perplexity.ai folder.  For the initial conversation, I just copy/pasted into a text file and no longer have the session link (I don't yet have a Perplexity account, maybe that'll change soon).  For the second one, I printed the html page to a PDF file from within the browser.  It has one of the input fields sitting over some of the text (for later files, I used developer tools in the browser to remove that field before printing).  I may just upload the most relevant two session files to this repo.
+
 TODO:  upload Perplexity question/answer files.
 
 None of this was immediate, it was a long series of questions submitted to Perplexity (almost sounds like an ad, but I'm not paid and I have definitely seen a massive improvement in directed search by having an LLM on top of a search engine like that).  I asked a ton of questions around astronomy concerning what maps or software I could use, and once I'd settled on Stellarium how to show only what you'd likely see with just your eyes or a normal camera (didn't even know about how star magnitude worked), and then a ton of questions on how to compare known star positions to images.  There are probably further modifications I'll have to make since if you want a CNN to be realtime, you're likely going to use YOLO CNNs.
@@ -57,5 +58,6 @@ TODO:  Include any needed Stellarium config files / location in this project's r
 
 ---------------
 Setting up a basic Python script to access data:
+
 (TODO:  Include this first Python script file name / location in this project repo after I add it)
 
