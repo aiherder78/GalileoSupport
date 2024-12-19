@@ -54,8 +54,76 @@ Replace "localhost" with your machine's IP address if accessing from another dev
 You can now use HTTP GET requests to control Stellarium remotely. For example:
   http://localhost:8090/api/main/focus?target=Mars
 
-Remember to check Stellarium's documentation for a full list of available API commands and their usage.
-(Thanks Perplexity, but I'm asking you first anyway...I'll check the documentation if something still doesn't work or if I need to double check if something might be available that you didn't mention)
+------------------
+Your first simple view retrieval Python script:
+Note: Stellarium must be running (in this case on your localhost, if you put it on a server on the net, change localhost to the server's IP, etc).
+About the coordinates used by Stellarium's API (local coordinates):  
+https://www.youtube.com/watch?v=sT8JIn7Q_Fo
+(this section of the Perplexity session q/a files will be maddening - in my defense, I often stay up all night doing research and the spot where I didn't even notice it was already using the http API and kept asking question it had already answered, it was probably about 5am and I hadn't slept)
+Note:  Stellarium uses right ascension and Declination (from an origin at the "vernal equinox") elsewhere according to Perplexity, and the three local coordinates are also not altitude and azimuth angles - that video above may help explain the relationship - to convert altitude and azimuth angles to those three numbers:
+P (the line length to the arbitrary point mentioned in the video) is set to 1 (a unit sphere - the spot  on the unit sphere is wherever the light from any individual star goes through the imaginary unit sphere to reach your eye / the observer's camera).
+Using the terms from that youtube video link (theta and phi, which are the same as azimuth and elevation respectively):
+Theta angle (azimuth) is the angle from 0 degrees (north).
+Phi angle (elevation) is the angle from 0 degrees (straight up, or in the video, the Z axis direction).
+Here's how you get the x, y, z parameters for the local coordinates used by the Stellarium http API.  Remember, if you do not set the Stellarium "observer" location/ground position, it is by default in Paris, France.
+x=cos(altitude)⋅cos(azimuth)
+y=cos(altitude)⋅sin(azimuth)
+y=cos(altitude)⋅sin(azimuth)
+z=sin(altitude)
+
+Without further ado, here's a basic Python script:
+
+import requests
+
+url = "http://localhost:8090/api/main/view"
+params = {"altAz": "[0.0001,0,1]"}
+response = requests.post(url, data=params)
+
+print("View set:", response.status_code)
+
+------------------
+If you have Stellarium's view client running in another window, your Stellarium observer camera should have jerked to the new given vector direction.
+Note:  That researcher with the CNN training Stellarium feedback loop had installed Stellarium "headless" and controlled it all with scripts.  I'm going to initially try to do this interactively / not headless.
+------------------
+Here's a short Python script and curl command to use the Stellarium http API to set the observer location:
+Curl command:
+curl -d "latitude=34.0522" -d "longitude=-118.2437" -d "altitude=100" http://localhost:8090/api/location/setlocationfields
+
+Python program:
+----------
+import requests
+
+# Define the base URL for the Stellarium API
+url_base = "http://localhost:8090/api/location/setlocationfields"
+
+# Function to set the location in Stellarium
+def set_location(latitude, longitude, altitude):
+    # Prepare the data to be sent in the POST request
+    data = {
+        'latitude': latitude,
+        'longitude': longitude,
+        'altitude': altitude
+    }
+    
+    # Send the POST request to set the location
+    response = requests.post(url_base, data=data)
+    
+    # Check if the request was successful
+    if response.status_code == 200:
+        print("Location set successfully!")
+    else:
+        print(f"Failed to set location: {response.status_code}, {response.text}")
+
+# Example usage
+if __name__ == "__main__":
+    # Set your desired latitude, longitude, and altitude
+    latitude = 34.0522  # Los Angeles latitude
+    longitude = -118.2437  # Los Angeles longitude
+    altitude = 100  # Altitude in meters
+
+    # Call the function to set the location
+    set_location(latitude, longitude, altitude)
+----------
 
 TODO:  Include any needed Stellarium config files / location in this project's repo after I add them
 
