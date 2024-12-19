@@ -80,7 +80,7 @@ y=cos(altitude)⋅sin(azimuth)
 z=sin(altitude)
 
 Without further ado, here's a basic Python script:
-
+~~~
 import requests
 
 url = "http://localhost:8090/api/main/view"
@@ -90,8 +90,8 @@ params = {"altAz": "[0.0001,0,1]"}
 response = requests.post(url, data=params)
 
 print("View set:", response.status_code)
+~~~
 
-------------------
 If you have Stellarium's view client running in another window, your Stellarium observer camera should have jerked to the new given vector direction.
 Note:  That researcher with the CNN training Stellarium feedback loop had installed Stellarium "headless" and controlled it all with scripts.  I'm going to initially try to do this interactively / not headless.
 ------------------
@@ -102,8 +102,7 @@ Curl command:
 curl -d "latitude=34.0522" -d "longitude=-118.2437" -d "altitude=100" http://localhost:8090/api/location/setlocationfields
 
 Python program:
-----------
-
+~~~
 import requests
 
 # Define the base URL for the Stellarium API
@@ -152,7 +151,7 @@ if __name__ == "__main__":
     
     set_location(latitude, longitude, altitude)
     
-----------
+~~~
 
 TODO:  Include any needed Stellarium config files / location in this project's repo after I add them
 
