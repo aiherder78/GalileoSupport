@@ -195,3 +195,5 @@ I'm personally going to use this as an opportunity to learn about GANs more now 
 6.  Finally, we'll be running CNN and/or YOLO training on the many generated training images and comparing accuracy results between different methods.
 
 The final product I want out of this will be a set of steps almost guaranteed to work as long as you have some minimum resolution of camera.  I'll distribute my best model, but ultimately it'll be nice to have a set of steps for everyone to follow that gets their own trained model regardless of camera type so that even if you have no knowledge of CNNs, you can just follow the steps and be set in some known period of time.
+
+Oh yeah - regardless of the results of the above, I'm also going to stick on an open source SLAM with the two thermal cameras and some ADSB querying / trig to try to determine if some light probably corelates to ADSB transponders.  If I get a good CNN/YOLO model, I'll stick them together in CNN-SLAM (and hopefully better, YOLO-SLAM).
