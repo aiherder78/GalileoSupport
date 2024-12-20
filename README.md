@@ -149,6 +149,49 @@ TODO:  Include any needed Stellarium config files / location in this project's r
 
 ---------------
 
-Setting up a basic Python script to access data:
+Here's a Python script to set the Stellarium time.  During training image generation, we're going to be using this like a machine gun while also changing the camera view vector around between time changes.
 
-(TODO:  Include this first Python script file name / location in this project repo after I add it)
+~~~
+import requests
+
+# Stellarium HTTP API configuration
+STELLARIUM_HOST = "http://localhost:8090"
+SET_TIME_ENDPOINT = "/api/main/time"
+
+def set_stellarium_time(year, month, day, hour, minute, second):
+    """
+    Set the time in Stellarium using the HTTP API.
+
+    Args:
+        year (int): Year to set.
+        month (int): Month to set.
+        day (int): Day to set.
+        hour (int): Hour to set (24-hour format).
+        minute (int): Minute to set.
+        second (int): Second to set.
+    """
+    url = f"{STELLARIUM_HOST}{SET_TIME_ENDPOINT}"
+    
+    # Payload for setting the time
+    payload = {
+        "time": {
+            "year": year,
+            "month": month,
+            "day": day,
+            "hour": hour,
+            "minute": minute,
+            "second": second
+        }
+    }
+~~~
+
+Now, here's the plan, and it's VERY simple (somewhat, the most complex thing is going to be mucking about with the AI/neural net hyperparameters):
+1.  We're going to first set the Stellarium view parameters to look as close to the arbitrary camera we end up using first.
+2.  Then, using the Stellarium API, we're going to generate tons of images from Stellarium for a long period of time from our planned observation position.  We're going to do what we can to grab all the star identifiers / anything to be sure of position in the sky.
+3.  We're also going to have a script to alternate between the realtime camera and Stellarium images overnight and maybe do some kind of GAN training.
+I'm personally going to use this as an opportunity to learn about GANs more now that I have a much better piece of hardware (an NVidia RTX 3080) than I did the last time (when I was using a much older laptop CPU  that tested my patience and I ultimately stopped that project due to most of the time being spent waiting).  My aim here will be to learn different ways the faker portion (I don't remember offhand right now what it's called) might readily replace data augmentation and how to balance learning rates between the classifier and faker/generator.  I'll be training them both on both real world images and Stellarium images, and of course the classifier will try to tell me if it's real world while the generator will try to fake the classifier.  If I can get the generator to apply weather patterns as data augmentation, I could then use that to potentially make my ultimate CNN star filter / identifier more fault tolerant (a fault being clouds, fog, or other occlusions of expected stars).
+4.  My main challenge as a programmer is going to be to develop methods to apply what I've learned from my last personal project, the YOLO Pygame Labeller (you can see that in another repo on this github ID too) to automatically label boxes in generated images, both real world camera observation and Stellarium screenshots, with classifiers by object type (and maybe also the name of the object).  I'm going to absolutely spray these boxes around every single image and I'm probably going to have at least hundreds of thousands of YOLO standard compliant label files total, one for each image generated.  I'm probably going to have to learn about total available filenames per disk partition index type along the way and potentially reformat my disk to handle more, we'll see.
+5.  One of my personal desired requirements will be to automatically gather the camera's star magnitude limitations and then somehow use that information to make the CNN automatically more accurate.
+6.  Finally, we'll be running CNN and/or YOLO training on the many generated training images and comparing accuracy results between different methods.
+
+The final product I want out of this will be a set of steps almost guaranteed to work as long as you have some minimum resolution of camera.  I'll distribute my best model, but ultimately it'll be nice to have a set of steps for everyone to follow that gets their own trained model regardless of camera type so that even if you have no knowledge of CNNs, you can just follow the steps and be set in some known period of time.
