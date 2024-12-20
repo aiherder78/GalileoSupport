@@ -200,3 +200,5 @@ Oh yeah - regardless of the results of the above, I'm also going to stick on an 
 
 Wild success condition:  I make it so automated that you won't even need any kind of special mount and people start using this program for general purpose and hobby astronomy when taking their personal telescopes out into the field.
 My primary goal though / hardest one is just a hotdog-no hotdog star filter that works extremely well.  If along the way I get some AI deblurring, identification of the individual star/planet, weather tolerant process, that will be extremely nice to have (object name is a definite secondary goal that I really want).
+
+TODO:  As I start adding files, rename this one to background.txt and replace with a simpler readme that has just the basic install / config / run steps with a short blurb on purpose at the top.  Make a separate license file to specify that this is public domain.
