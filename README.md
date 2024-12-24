@@ -184,6 +184,12 @@ def set_stellarium_time(year, month, day, hour, minute, second):
         }
     }
 ~~~
+Thermal camera source code examples:
+https://github.com/leswright1977/PyThermalCamera
+https://www.youtube.com/watch?v=PiVwZoQ8_jQ
+
+My initial code for reading the thermal cameras (both of them, takes a single integer argument - for instance, to read the cam at /dev/video0 just do "python3 readcam.py 0" - if you have multiple thermal cameras connected, each will likely have two videoX numbers so that the first will have /dev/video0 and /dev/video1 and the second will have /dev/video2 and /dev/video3 - therefore to read from both cameras use two terminals and issue the command on each of them with one having argument 0 and the other argument 2) is in "readcam.py".
+TODO:  Change the coloring to match the heat levels using full RGB with redder being hotter.  Up the apparent resolution for better visibility like he did.
 
 Now, here's the plan, and it's VERY simple (somewhat, the most complex thing is going to be mucking about with the AI/neural net hyperparameters):
 1.  We're going to first set the Stellarium view parameters to look as close to the arbitrary camera we end up using first.
