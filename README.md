@@ -204,9 +204,6 @@ The final product I want out of this will be a set of steps almost guaranteed to
 
 Oh yeah - regardless of the results of the above, I'm also going to stick on an open source SLAM with the two thermal cameras and some ADSB querying / trig to try to determine if some light probably corelates to ADSB transponders.  If I get a good CNN/YOLO model, I'll stick them together in CNN-SLAM (and hopefully better, YOLO-SLAM).
 
-Wild success condition:  I make it so automated that you won't even need any kind of special mount and people start using this program for general purpose and hobby astronomy when taking their personal telescopes out into the field.
-My primary goal though / hardest one is just a hotdog-no hotdog star filter that works extremely well.  If along the way I get some AI deblurring, identification of the individual star/planet, weather tolerant process, that will be extremely nice to have (object name is a definite secondary goal that I really want).
-
 TODO:  As I start adding files, rename this one to background.txt and replace with a simpler readme that has just the basic install / config / run steps with a short blurb on purpose at the top.  Make a separate license file to specify that this is public domain.
 
 --- Update ---
