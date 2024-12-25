@@ -208,3 +208,12 @@ Wild success condition:  I make it so automated that you won't even need any kin
 My primary goal though / hardest one is just a hotdog-no hotdog star filter that works extremely well.  If along the way I get some AI deblurring, identification of the individual star/planet, weather tolerant process, that will be extremely nice to have (object name is a definite secondary goal that I really want).
 
 TODO:  As I start adding files, rename this one to background.txt and replace with a simpler readme that has just the basic install / config / run steps with a short blurb on purpose at the top.  Make a separate license file to specify that this is public domain.
+
+--- Update ---
+Shot some outside video with the P2 Pro.  As far as the raw data I'm getting, it's two images with essentially the same data but different coloring.  The top is grayscale and the bottom is green.  Since I'm using cv2 capture directly from my computer, I don't have access to the app they provide.  I'm going to need to do my own color conversion.  Same for the TOPDON TC001.
+No problem though, I still have the raw temperature data / raw data provided again in grayscale.
+So these are going to be relatively close range.  The focal length is such that they're best for up close, but I'm going to try to capture nearby flying craft (or birds, etc) anyway to see what I can do in spite of that.
+I went to Walmart and bought a few tiny mason jars and I'm going to cut a hole in the lids for the cords and then stick them outside nearby pointing at an angle upward.  I'll have to remember to bring them in until I figure out how to get around the potential damage from the sun to the sensor during the day (manual on one of the devices says not to point it directly at the sun as it could damage the sensor).
+I read somewhere that the P2 Pro has a visual sensor in addition, but I'm not seeing a difference in the type of data between the two images provided by both of the thermal cameras (other than the P2 Pro has a slightly larger max temp of 1112F versus the TOPDON TC001's 1022F max).
+
+Therefore, among other things (two more USB C to A charging 10 ft charging and extension cables and a 4 port USB hub), I bought an outdoor wifi visual camera from Walmart as well.  We'll see if I can access it directly, otherwise I'll take it back (using an app isn't an option for me as I need to integrate all the data I grab).  I'm probably at about $100 in cables and well over $800 now.
