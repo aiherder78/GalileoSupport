@@ -210,6 +210,7 @@ My primary goal though / hardest one is just a hotdog-no hotdog star filter that
 TODO:  As I start adding files, rename this one to background.txt and replace with a simpler readme that has just the basic install / config / run steps with a short blurb on purpose at the top.  Make a separate license file to specify that this is public domain.
 
 --- Update ---
+
 Shot some outside video with the P2 Pro.  As far as the raw data I'm getting, it's two images with essentially the same data but different coloring.  The top is grayscale and the bottom is green.  Since I'm using cv2 capture directly from my computer, I don't have access to the app they provide.  I'm going to need to do my own color conversion.  Same for the TOPDON TC001.
 No problem though, I still have the raw temperature data / raw data provided again in grayscale.
 So these are going to be relatively close range.  The focal length is such that they're best for up close, but I'm going to try to capture nearby flying craft (or birds, etc) anyway to see what I can do in spite of that.
@@ -219,5 +220,7 @@ I read somewhere that the P2 Pro has a visual sensor in addition, but I'm not se
 Therefore, among other things (two more USB C to A charging 10 ft charging and extension cables - 2x $8 for a total of $16, and a 4 port USB hub - roughly $30), I bought an outdoor wifi visual camera from Walmart as well.  We'll see if I can access it directly, otherwise I'll take it back (using an app isn't an option for me as I need to integrate all the data I grab).  I'm probably at about $100 in cables and well over $800 now (I didn't need to rush shipping to get the earlier cables before Christmas, probably should take my time quite a bit more to keep costs down).
 
 Other - I lost quite a bit of my Perplexity threads while rebooting many times (Brave browser isn't asking to restore tabs, probably need to adjust settings) during the troubleshooting of the thermal cameras.  The readcam.py is the ultimate result of all that.  
+
 TODO:  It needs further testing with a virtualenv to make sure all installs are included in the instructions.  For instance, I had serious problems accessing the P2 Pro at first due to ffmpeg not being installed.  I guess it doesn't get installed when you install opencv.  There was also a UDEV rule I added for the TOPDON TC001 + added my user to the video group.
+
 TODO:  Upgrade to Perplexity Pro (I'm using them so much that I'm about to do that - it'll be interesting to see how much extra the Pro queries give in terms of intelligence to the answers / which models will be best with the additional options).
