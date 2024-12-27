@@ -226,7 +226,7 @@ Done:  Upgrade to Perplexity Pro (this is my favorite LLM so far and since it ha
 
 --- Update ----
 
-I am currently Q/A'ing Perplexity on background info I need to gather arbitrary camera type parameters nad set the Ocular plugin with them, then also adjust sky brightness.  I'm going to have a script to run overnight that takes note of maximum magnitude stars the camera can see.  I'm also going to have an included auto sky brightness adjusting function that I'll use in other code as well.
+I am currently Q/A'ing Perplexity on background info I need to gather arbitrary camera type parameters and set the Ocular plugin with them, then also adjust sky brightness.  I'm going to have a script to run overnight that takes note of maximum magnitude stars the camera can see.  I'm also going to have an included auto sky brightness adjusting function that I'll use in other code as well.
 
 Ultimately, once the settings are gathered, that should be enough for a good feedback loop in getting tons of images over a long period of time for a given observation position, then training a neural net with it.  Then we'll have a CNN, YOLO, or maybe realtime visual transformer network that can automatically recognize stars and planets from that position.
 
