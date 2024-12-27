@@ -259,3 +259,23 @@ if response.status_code == 200:
 else:
     print("Failed to adjust sky brightness")
 ~~~
+
+Getting parameters from an arbitrary camera using a wall, a tape measure, and something to mark with (I told Perplexity to use duct tape):
+
+To gather the necessary parameters of an arbitrary camera for Stellarium using basic tools like a tape measure, duct tape, and the side of your house, you can follow these steps:
+Measuring the Field of View
+Set up your camera on a tripod facing a flat wall.
+Use duct tape to mark a straight horizontal line on the wall.
+Take a photo of the wall, ensuring the taped line is visible from edge to edge in the frame.
+Measure the actual length of the taped line on the wall.
+Measure the distance from the camera to the wall.
+
+Calculating Parameters:
+Calculate the horizontal field of view angle using trigonometry:
+
+Field of view angle = 2 * arctan (half of duct tape line length / distance to wall)
+Focal length ≈ sensor width / (2×tan(field of view angle / 2))
+Note:  Field of view is commonly abbreviated as FOV.
+ 
+Note: You'll need to estimate the sensor width based on the camera type (e.g., 36mm for full-frame, 22.3mm for APS-C).
+Count the pixels in the horizontal and vertical directions of the image to get the resolution.
