@@ -262,7 +262,7 @@ else:
 
 Getting parameters from an arbitrary camera using a wall, a tape measure, and something to mark with (I told Perplexity to use duct tape):
 
-To gather the necessary parameters of an arbitrary camera for Stellarium using basic tools like a tape measure, duct tape, and the side of your house, you can follow these steps:
+To gather the necessary parameters of an arbitrary camera for Stellarium using basic tools like a tape measure, duct tape, and a wall, you can follow these steps:
 Measuring the Field of View
 Set up your camera on a tripod facing a flat wall.
 Use duct tape to mark a straight horizontal line on the wall.
