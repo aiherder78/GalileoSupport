@@ -92,6 +92,8 @@ Phi angle (elevation) is the angle from 0 degrees (straight up, or in the video,
 Here's how you get the x, y, z parameters for the local coordinates used by the Stellarium http API.  If you don't set it, in Stellarium your location will be whatever the Stellarium default is of course, and I saw another Youtube video stating the time for the observer would be your computer's current time.
 
 ~~~
+#Note:  0 altitude points at the horizon, 90 points straight up
+#Note2: 0 azimuth points north, 90 east, 180 south, 270 west, 360 back north
 x=cos(altitude)⋅cos(azimuth)
 y=cos(altitude)⋅sin(azimuth)
 z=sin(altitude)
