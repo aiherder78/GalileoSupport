@@ -231,3 +231,31 @@ I am currently Q/A'ing Perplexity on background info I need to gather arbitrary 
 Ultimately, once the settings are gathered, that should be enough for a good feedback loop in getting tons of images over a long period of time for a given observation position, then training a neural net with it.  Then we'll have a CNN, YOLO, or maybe realtime visual transformer network that can automatically recognize stars and planets from that position.
 
 My hope is that I can get it near enough that I can directly compare the two images throughout the night (camera for one, Stellarium for the other as I'll have the times sync'd).  I'll do a pixel by pixel comparison with auto overall brightness adjustment sent to Stellarium.  I'll keep track of stars the camera can't see and their magnitudes, as well as the dimmest star the camera did see.  For this script, light points the camera sees but Stellarium does not have will be ignored.
+
+Brightness adjusting Python function (this changes the limiting star magnitude - higher magnitude stars are dimmer...so far at my knowledge level, I think that the naked eye can roughly see to about 6.5 magntitude):
+Note:  Perplexity just generated this function, I still need to test it.  So far I've tested the vector change script and the observer location change one.
+~~~
+import requests
+
+# Stellarium server details
+stellarium_url = "http://localhost:8090"
+
+# Set the new sky brightness value (adjust as needed)
+new_brightness = 6.5  # Range is typically 1 (brightest) to 8 (darkest)
+
+# API endpoint for setting properties
+endpoint = f"{stellarium_url}/api/main/property"
+
+# Set the light pollution limiting magnitude
+payload = {
+    "id": "LightPollutionLimitingMagnitude",
+    "value": new_brightness
+}
+
+response = requests.post(endpoint, json=payload)
+
+if response.status_code == 200:
+    print(f"Sky brightness adjusted to {new_brightness}")
+else:
+    print("Failed to adjust sky brightness")
+~~~
