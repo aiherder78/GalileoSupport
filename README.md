@@ -222,4 +222,12 @@ Other - I lost quite a bit of my Perplexity threads while rebooting many times (
 
 TODO:  It needs further testing with a virtualenv to make sure all installs are included in the instructions.  For instance, I had serious problems accessing the P2 Pro at first due to ffmpeg not being installed.  I guess it doesn't get installed when you install opencv.  There was also a UDEV rule I added for the TOPDON TC001 + added my user to the video group.
 
-TODO:  Upgrade to Perplexity Pro (I'm using them so much that I'm about to do that - it'll be interesting to see how much extra the Pro queries give in terms of intelligence to the answers / which models will be best with the additional options).
+Done:  Upgrade to Perplexity Pro (this is my favorite LLM so far and since it has an extensive ability to automatically search the net, it fulfills quite a few of my ideal system requirements for now).
+
+--- Update ----
+
+I am currently Q/A'ing Perplexity on background info I need to gather arbitrary camera type parameters nad set the Ocular plugin with them, then also adjust sky brightness.  I'm going to have a script to run overnight that takes note of maximum magnitude stars the camera can see.  I'm also going to have an included auto sky brightness adjusting function that I'll use in other code as well.
+
+Ultimately, once the settings are gathered, that should be enough for a good feedback loop in getting tons of images over a long period of time for a given observation position, then training a neural net with it.  Then we'll have a CNN, YOLO, or maybe realtime visual transformer network that can automatically recognize stars and planets from that position.
+
+My hope is that I can get it near enough that I can directly compare the two images throughout the night (camera for one, Stellarium for the other as I'll have the times sync'd).  I'll do a pixel by pixel comparison with auto overall brightness adjustment sent to Stellarium.  I'll keep track of stars the camera can't see and their magnitudes, as well as the dimmest star the camera did see.  For this script, light points the camera sees but Stellarium does not have will be ignored.
