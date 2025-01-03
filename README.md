@@ -282,3 +282,9 @@ Note:  Field of view is commonly abbreviated as FOV.
  
 Note: You'll need to estimate the sensor width based on the camera type (e.g., 36mm for full-frame, 22.3mm for APS-C).
 Count the pixels in the horizontal and vertical directions of the image to get the resolution.
+
+----
+Update:
+I haven't been using my thermal cameras overnight yet.  It's been bothering me that I might fall asleep and leave them to be exposed and damaged by the sun.  So, I've been looking for a solution that will automatically turn the camera lense away from the sun and into a shaded area before daylight, all for cheap.
+I've made some progress:
+I found a pan-tilt two servo set with some supports.  I also have been looking into options for cheaply controlling the servos while having it on the network.  Along the way, I've come across some curious issues, such as the controller boards mostly being for smaller servos and requiring less power as well as not coming with the required power supplies.  I found one servo driver board that supported more and finally after at least two hours searching for just the power supply, found one that both wasn't too expensive and wasn't the type that you just modified the voltage by hand (if you bumped one of those you'd ruin the driver board).  So now I'm just finishing up on my understanding on how I'll connect the driver board with an Arduino or RPi.  The code for controlling the servos is pretty simple, will be using output from the Arduino or RPI GPIO headers (if I get an RPi Zero, I'll get one of the solderless headers to go with it) for the data line and will be sending the ground of the power supply through the ground on the Arduino or RPi to provide a common reference point...etc.  Overall, I'll hopefully keep this entire hardware update under $150...hopefully.
