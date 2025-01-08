@@ -291,8 +291,11 @@ Update: I haven't been using my thermal cameras overnight yet. It's been botheri
 
 Update (Jan 4th, 2025):
 Got a reply from Evan at Bottango concerning potential power supplies to use with his board.  Ordered parts -
-1.  Pan-tilt kit
-2.  Bottango servo board
-3.  Power supply
-4.  Outdoor camera housing
+1.  Pan-tilt kit (received)
+2.  Bottango servo board (shipped)
+3.  Power supply (received)
+4.  Outdoor camera housing (received)
 Should be here in about a week.  In the meantime, I'm going to prepare my next parts list (Arduino or RPi) to have a dedicated board for the more complex logic (timing logic on commands, server keeping the servo control setup on the wifi, potentially a few more random small things.  One of my neighbors seems interested in helping put together stuff and checking out any of the software results.  Maybe he'll help me setup my antenna for keeping track of nearby aircraft/drone transponders.  If I get the RPi, I'll probably try running both the servo logic and the ADS-B decoder process using it and my software-defined radio chip - with that connected to the antenna.
+
+-----
+Update - another thread with Perplexity starting with a tiny bit more discussion around GANs but then moving on using DETR (visual transformer with a CNN backbone).  Uploading that now.
