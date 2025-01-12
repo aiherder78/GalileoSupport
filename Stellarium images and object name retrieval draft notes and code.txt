@@ -1,0 +1,286 @@
+# This file contains the initial functions written by Perplexity.ai which will be used for the loop with Stellarium to generate images, the difference of gaussians function that is run on each of those
+to get the bounding boxes for light sources, the methods (2) that query Stellarium for any objects at those positions, etc.
+
+#Q: Could you write a function that takes in camera FoV and resolution and outputs the angle differences (one up/down & one left/right) per pixel?  For instance, if I give it the camera FoV parameters and an (x,y) pixel position, it should return angle horizontal and angle vertical from the center of the image (where I'm assuming the camera vector will be pointing at).
+
+#Answer:  Here’s a Python function that calculates the angle differences (horizontal and vertical) for a given pixel position based on the camera's field of view (FoV) and resolution. This function assumes that the camera's center vector points at the center of the image:
+
+~~~
+import math
+
+def calculate_angle_offsets(fov_horizontal, fov_vertical, resolution_width, resolution_height, pixel_x, pixel_y):
+    # Calculate the angle per pixel
+    angle_per_pixel_horizontal = fov_horizontal / resolution_width
+    angle_per_pixel_vertical = fov_vertical / resolution_height
+    
+    # Calculate the center of the image
+    center_x = resolution_width / 2
+    center_y = resolution_height / 2
+
+    # Calculate the pixel offsets from the center
+    offset_x = pixel_x - center_x
+    offset_y = pixel_y - center_y
+
+    # Calculate the angles from the center
+    angle_horizontal = offset_x * angle_per_pixel_horizontal
+    angle_vertical = offset_y * angle_per_pixel_vertical
+
+    return angle_horizontal, angle_vertical
+
+# Example usage:
+fov_horizontal = 70.8  # Horizontal FoV in degrees
+fov_vertical = 55.6     # Vertical FoV in degrees
+resolution_width = 320   # Image width in pixels
+resolution_height = 240  # Image height in pixels
+
+pixel_x = 20  # Example pixel x-coordinate
+pixel_y = 25  # Example pixel y-coordinate
+
+angles = calculate_angle_offsets(fov_horizontal, fov_vertical, resolution_width, resolution_height, pixel_x, pixel_y)
+print(f"Angle Horizontal: {angles[0]:.4f} degrees, Angle Vertical: {angles[1]:.4f} degrees")
+~~~
+
+# Explanation:
+Input Parameters:
+fov_horizontal: The horizontal field of view in degrees.
+fov_vertical: The vertical field of view in degrees.
+resolution_width: The width of the image in pixels.
+resolution_height: The height of the image in pixels.
+pixel_x: The x-coordinate of the pixel for which you want to calculate the angle.
+pixel_y: The y-coordinate of the pixel for which you want to calculate the angle.
+Calculations:
+The function first calculates how many degrees each pixel represents by dividing the total FoV by the respective resolution dimensions.
+It then finds the offsets of the specified pixel from the center of the image.
+Finally, it computes the angles by multiplying these offsets by their respective angle-per-pixel values.
+
+----------------
+#Q:  Can you write a function to make a new vector taking the center vector and adding those two angles?
+
+#A:  Certainly! Here's a Python function that takes a center vector and adds the horizontal and vertical angles to create a new vector:
+
+~~~
+import math
+
+def create_new_vector(center_vector, angle_horizontal, angle_vertical):
+    # Unpack the center vector
+    cx, cy, cz = center_vector
+    
+    # Convert angles from degrees to radians
+    angle_h_rad = math.radians(angle_horizontal)
+    angle_v_rad = math.radians(angle_vertical)
+    
+    # Calculate the magnitude of the center vector
+    magnitude = math.sqrt(cx**2 + cy**2 + cz**2)
+    
+    # Normalize the center vector
+    nx, ny, nz = cx/magnitude, cy/magnitude, cz/magnitude
+    
+    # Rotate around the vertical axis (for horizontal angle)
+    rx = nx * math.cos(angle_h_rad) - nz * math.sin(angle_h_rad)
+    ry = ny
+    rz = nx * math.sin(angle_h_rad) + nz * math.cos(angle_h_rad)
+    
+    # Rotate around the horizontal axis (for vertical angle)
+    fx = rx
+    fy = ry * math.cos(angle_v_rad) - rz * math.sin(angle_v_rad)
+    fz = ry * math.sin(angle_v_rad) + rz * math.cos(angle_v_rad)
+    
+    # Normalize the final vector
+    magnitude = math.sqrt(fx**2 + fy**2 + fz**2)
+    new_vector = (fx/magnitude, fy/magnitude, fz/magnitude)
+    
+    return new_vector
+
+# Example usage:
+center_vector = (0, 0, 1)  # Assuming the camera is pointing along the z-axis
+angle_horizontal = 5  # 5 degrees to the right
+angle_vertical = -3  # 3 degrees down
+
+new_vector = create_new_vector(center_vector, angle_horizontal, angle_vertical)
+print(f"New vector: {new_vector}")
+~~~
+
+This function does the following:
+It takes three parameters:
+center_vector: A tuple (x, y, z) representing the direction the camera is pointing.
+angle_horizontal: The horizontal angle offset in degrees.
+angle_vertical: The vertical angle offset in degrees.
+It normalizes the center vector to ensure we're working with a unit vector.
+It applies two rotations:
+First, it rotates around the vertical axis (y-axis in this case) to account for the horizontal angle.
+Then, it rotates around the horizontal axis (x-axis after the first rotation) to account for the vertical angle.
+Finally, it normalizes the resulting vector to ensure it's a unit vector.
+This function assumes a right-handed coordinate system where:
+The x-axis points to the right
+The y-axis points up
+The z-axis points forward (into the scene)
+You can adjust the axes if your system uses a different convention. Also, note that this function assumes small angles. For very large angles, you might need to use a more complex rotation method, such as quaternions.
+
+-----------
+Q:  Can you write a function to take the output vector from the above function and query Stellarium for what object is at that vector?  The function should take a datetime, lat/long observation location, and that vector.  It should output an object type (if any) and the name of the object.  If Stellarium returns that nothing is there, the return type should be none.
+
+A:  Here's a Python function that queries Stellarium for an object at a given vector, using the StellariumRC library:
+
+~~~
+from datetime import datetime
+import StellariumRC
+
+def query_stellarium_object(observation_datetime, latitude, longitude, vector):
+    s = StellariumRC.Stellarium()
+    
+    # Set the observation time and location
+    s.core.setDate(observation_datetime.strftime("%Y-%m-%d %H:%M:%S"))
+    s.core.setObserverLocation(longitude, latitude, 0, 1, "", "Earth")
+    
+    # Convert vector to altitude and azimuth
+    alt_az = s.core.vector2altAzi(vector[0], vector[1], vector[2])
+    
+    # Query Stellarium for the object at the given position
+    object_info = s.core.getObjectInfo(alt_az[0], alt_az[1], "")
+    
+    if object_info:
+        return object_info['type'], object_info['name']
+    else:
+        return None, None
+
+# Example usage:
+observation_time = datetime(2025, 1, 11, 19, 0, 0)  # January 11, 2025, 7 PM
+latitude = 41.8781  # Chicago latitude
+longitude = -87.6298  # Chicago longitude
+vector = (0.1, 0.2, 0.9)  # Example vector
+
+object_type, object_name = query_stellarium_object(observation_time, latitude, longitude, vector)
+
+if object_type and object_name:
+    print(f"Object found: {object_type} - {object_name}")
+else:
+    print("No object found at the specified position.")
+~~~
+This function does the following:
+It initializes a connection to Stellarium using the StellariumRC library.
+It sets the observation time and location in Stellarium using the provided datetime and latitude/longitude.
+It converts the input vector to altitude and azimuth coordinates using Stellarium's vector2altAzi method.
+It queries Stellarium for the object at the given position using the getObjectInfo method.
+If an object is found, it returns the object type and name. If no object is found, it returns None for both type and name.
+Note that this function assumes Stellarium is running and the RemoteControl plugin is enabled. Also, make sure to install the StellariumRC library using pip install stellariumrc before running this code
+
+--------------------
+
+Q:  Can you write a function that scans over an image and returns a list of (x,y) coordinates for the pixels that get positive results for a difference of gaussians?  I'd be looking for point source lights like stars or possibly planets.  I think it might take an argument for brightness difference, not sure.
+
+...After it wrote one function, had a few more Q/As that later indicated that some planets might potentially light up more than one pixel in the image (even for a 1080p camera).  Therefore, the original function was modified to include a bounding box approach - see the Perplexity.ai thread in the Perplexity folder of this repo to see the original dialogue...
+
+A:  Certainly! Here's a Python function that uses the Difference of Gaussians (DoG) method to detect point sources of light in an image, such as stars or planets. This function uses OpenCV and NumPy libraries for image processing:
+
+~~~
+import cv2
+import numpy as np
+
+def detect_celestial_objects(image_path, low_sigma=1, high_sigma=2, threshold=10, min_area=1, max_area=50):
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    
+    low_blur = cv2.GaussianBlur(img, (0, 0), low_sigma)
+    high_blur = cv2.GaussianBlur(img, (0, 0), high_sigma)
+    
+    dog = low_blur - high_blur
+    
+    _, binary = cv2.threshold(dog, threshold, 255, cv2.THRESH_BINARY)
+    
+    contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
+    celestial_objects = []
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        if min_area <= area <= max_area:
+            x, y, w, h = cv2.boundingRect(contour)
+            celestial_objects.append((x, y, w, h))
+    
+    return celestial_objects
+
+# Example usage:
+image_path = "night_sky.jpg"
+celestial_objects = detect_celestial_objects(image_path, min_area=1, max_area=50)
+print(f"Detected {len(celestial_objects)} celestial objects:")
+for x, y, w, h in celestial_objects:
+    print(f"  Bounding box: ({x}, {y}, {w}, {h})")
+~~~
+
+This updated function:
+Uses cv2.boundingRect() to get bounding boxes for detected objects.
+Includes min_area and max_area parameters to filter out very small (noise) or very large (non-celestial) objects.
+Returns a list of tuples (x, y, width, height) for each detected object.
+Adjust the Stellarium query function:
+You'll need to modify the query_stellarium_object function to accept a bounding box instead of a single point. You might want to query Stellarium for the center point of the bounding box, or potentially for multiple points within the box for larger objects.
+Update the training process:
+Use the bounding box information in your loss function calculations.
+Consider using IoU (Intersection over Union) as part of your objectness loss.
+Model output:
+Ensure your model is designed to output bounding boxes (x, y, width, height) instead of just (x, y) coordinates.
+This approach will allow your model to handle both point-like stars and slightly larger objects like visible planets, providing more accurate detections and classifications.
+
+---------------
+
+Q:  OK, we still can use the bounding box addition to the difference of gaussian function, but we'll need to come up with a strategy to query Stellarium using it.  If the bounding box is a single pixel in size then we can go directly to the next function.  If it's larger, we might need to query Stellarium multiple times.
+
+...the answering function was getting too long, indicating to me design problems with the process...generally when programming you want to keep your functions within 25 lines optimally, which will support modularity and redesign later...
+
+Q.  I'm still going to use the original vector query function you wrote.  I'll need to make another function in between the difference of gaussian that generates bounding boxes and that original query function.  This function will call the Stellarium query function for every pixel (I'm going with a simple / hammer approach / grid search first) within the bounding box, keeping a list of the (x,y) and object name of every unique return.  Then it will return that final list.
+Please write this intermediate function now.
+
+A:  Certainly! Here's the intermediate function that performs a grid search within the bounding box and queries Stellarium for each pixel, returning a list of unique objects found:
+
+~~~
+def query_bounding_box(center_vector, fov_horizontal, fov_vertical, resolution_width, resolution_height, bbox, observation_datetime, latitude, longitude):
+    x, y, width, height = bbox
+    unique_objects = {}
+
+    for dx in range(width):
+        for dy in range(height):
+            pixel_x = x + dx
+            pixel_y = y + dy
+            
+            # Calculate angle offsets for this pixel
+            angle_horizontal, angle_vertical = calculate_angle_offsets(
+                fov_horizontal, fov_vertical, resolution_width, resolution_height, pixel_x, pixel_y)
+            
+            # Create a new vector for this pixel
+            pixel_vector = create_new_vector(center_vector, angle_horizontal, angle_vertical)
+            
+            # Query Stellarium for this vector
+            object_type, object_name = query_stellarium_object(
+                observation_datetime, latitude, longitude, pixel_vector)
+            
+            if object_name:
+                unique_objects[(pixel_x, pixel_y)] = (object_type, object_name)
+
+    return list(unique_objects.items())
+
+# Example usage:
+center_vector = (0, 0, 1)  # Assuming the camera is pointing along the z-axis
+fov_horizontal = 70.8  # Horizontal FoV in degrees
+fov_vertical = 55.6  # Vertical FoV in degrees
+resolution_width = 1920  # Image width in pixels
+resolution_height = 1080  # Image height in pixels
+bbox = (100, 100, 3, 3)  # Example bounding box
+observation_time = datetime(2025, 1, 11, 19, 0, 0)  # January 11, 2025, 7 PM
+latitude = 41.8781  # Chicago latitude
+longitude = -87.6298  # Chicago longitude
+
+objects = query_bounding_box(center_vector, fov_horizontal, fov_vertical, 
+                             resolution_width, resolution_height, bbox, 
+                             observation_time, latitude, longitude)
+
+for (x, y), (obj_type, obj_name) in objects:
+    print(f"Object found at ({x}, {y}): {obj_type} - {obj_name}")
+~~~
+
+This function does the following:
+It takes the necessary parameters including the center vector, field of view, image resolution, bounding box, observation datetime, and location.
+It iterates over each pixel within the bounding box.
+For each pixel, it:
+Calculates the angle offsets using the calculate_angle_offsets function.
+Creates a new vector for this pixel using the create_new_vector function.
+Queries Stellarium using the query_stellarium_object function.
+If an object is found, it's added to a dictionary with the pixel coordinates as the key. This ensures we only keep unique objects.
+Finally, it returns a list of tuples, each containing the pixel coordinates and the object information.
+This approach will query Stellarium for every pixel within the bounding box, which could be computationally expensive for larger boxes. However, it ensures we don't miss any objects and provides a good starting point. You can optimize this further if needed, perhaps by reducing the number of queries for larger bounding boxes or implementing early stopping if a certain number of unique objects are found.
