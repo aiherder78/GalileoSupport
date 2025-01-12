@@ -6,6 +6,38 @@ to get the bounding boxes for light sources, the methods (2) that query Stellari
 core.setTimeRate(0);
 ~~~
 
+#Or freeze and restart normal time progression with a Python script:
+~~~
+import requests
+import time
+
+def freeze_and_resume_time():
+    # Stellarium API endpoint
+    url = "http://localhost:8090/api/main/time"
+
+    # Freeze time
+    response_freeze = requests.post(url, data={"timeRate": "0"})
+    if response_freeze.status_code == 200:
+        print("Time frozen successfully.")
+    else:
+        print(f"Failed to freeze time. Status code: {response_freeze.status_code}")
+
+    # Wait briefly to ensure the command is processed
+    time.sleep(0.1)
+
+    # Resume normal time
+    response_resume = requests.post(url, data={"timeRate": "1"})
+    if response_resume.status_code == 200:
+        print("Normal time resumed successfully.")
+    else:
+        print(f"Failed to resume normal time. Status code: {response_resume.status_code}")
+
+if __name__ == "__main__":
+    freeze_and_resume_time()
+~~~
+
+------------
+
 # Change the location of the observer in Stellarium using a Python script (must enable remote control API from the plugins menu):
 
 ~~~
