@@ -1,6 +1,11 @@
 # This file contains the initial functions written by Perplexity.ai which will be used for the loop with Stellarium to generate images, the difference of gaussians function that is run on each of those
 to get the bounding boxes for light sources, the methods (2) that query Stellarium for any objects at those positions, etc.
 
+#Given that for each observer position screenshot we generate in Stellarium, we might want to query for object names and types at many different pixel positions, we will want to freeze time in Stellarium.  Do this by adding this line to the startup.ssc file:
+~~~
+core.setTimeRate(0);
+~~~
+
 # Change the location of the observer in Stellarium using a Python script (must enable remote control API from the plugins menu):
 
 ~~~
