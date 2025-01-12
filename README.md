@@ -299,3 +299,11 @@ Should be here in about a week.  In the meantime, I'm going to prepare my next p
 
 -----
 Update - another thread with Perplexity starting with a tiny bit more discussion around GANs but then moving on using DETR (visual transformer with a CNN backbone).  Uploading that now.
+
+----- Update Sunday Jan 12, 2025 -----
+Added the draft notes, "Stellarium images and object name retrieval draft notes and code.txt" last night.
+It contains a draft process - probably almost everything needed to autonomously gather the images and requery Stellarium after doing difference of gaussians on them for potential objects.  It needs maybe a tiny bit more as far as how to arrange the dataset.  I'm exploring using docker with headless Stellarium now - I was asking questions of Perplexity on that.  Basically, I might explore having a VNC server with Stellarium GUI going to a xvfb (virtual framebuffer), then connecting to it from the host.
+The reason for this is that if I do it right, it might allow me to see into the training process.  For instance, if I have Stellarium time frozen so that all the queries go to the same exact second, then when I do the training loop, I could possibly have the transformer add its predictions on top of the same virtual framebuffer and be able to see it training live using the VNC client.
+
+Right now, I'm sort of aiming at using a DETR with the difference of gaussians instead of a CNN.  I'm probably going to have to change it to a pure transformer later...maybe.  I'm not sure yet.
+It's about time for me to check the post office for whether the Botango servo control board has arrived yet.  I'll do that either tonight or tomorrow.  I remembered that I already have an Arduino-like board sitting around, might try to use that initially, directly connected to my computer.
