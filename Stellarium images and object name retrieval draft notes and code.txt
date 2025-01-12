@@ -1,6 +1,80 @@
 # This file contains the initial functions written by Perplexity.ai which will be used for the loop with Stellarium to generate images, the difference of gaussians function that is run on each of those
 to get the bounding boxes for light sources, the methods (2) that query Stellarium for any objects at those positions, etc.
 
+# Change the location of the observer in Stellarium using a Python script (must enable remote control API from the plugins menu):
+~~~
+import requests
+# Define the base URL for the Stellarium API
+url_base = "http://localhost:8090/api/location/setlocationfields"
+# Function to set the location in Stellarium
+def set_location(latitude, longitude, altitude):
+    # Prepare the data to be sent in the POST request
+    data = {
+        'latitude': latitude,
+        'longitude': longitude,
+        'altitude': altitude
+    }
+    # Send the POST request to set the location
+    response = requests.post(url_base, data=data)
+    # Check if the request was successful
+    if response.status_code == 200:
+        print("Location set successfully!")
+    else:
+        print(f"Failed to set location: {response.status_code}, {response.text}")
+# Example usage
+if __name__ == "__main__":
+    # Set your desired latitude, longitude, and altitude
+    latitude = 34.0522  # Los Angeles latitude
+    longitude = -118.2437  # Los Angeles longitude
+    altitude = 100  # Altitude in meters
+    # Call the function to set the location
+    set_location(latitude, longitude, altitude)
+~~~
+-----------
+Change the observer camera vector in Stellarium:
+#Note:  0 altitude points at the horizon, 90 points straight up
+#Note2: 0 azimuth points north, 90 east, 180 south, 270 west, 360 back north
+x=cos(altitude)⋅cos(azimuth)
+y=cos(altitude)⋅sin(azimuth)
+z=sin(altitude)
+~~~
+import requests
+url = "http://localhost:8090/api/main/view"
+params = {"altAz": "[0.0001,0,1]"}   #This is actually x, y, and z from the equations above.
+response = requests.post(url, data=params)
+print("View set:", response.status_code)
+~~~
+-----------
+#Set the datetime in Stellarium for the observer (Stellarium uses Julian calendar):
+~~~
+import requests
+
+STELLARIUM_HOST = "http://localhost:8090"
+SET_TIME_ENDPOINT = "/api/main/time"
+
+def set_stellarium_time(year, month, day, hour, minute, second):
+    url = f"{STELLARIUM_HOST}{SET_TIME_ENDPOINT}"
+    
+    payload = {
+        "year": year,
+        "month": month,
+        "day": day,
+        "hour": hour,
+        "minute": minute,
+        "second": second
+    }
+
+    response = requests.post(url, json=payload)
+    
+    if response.status_code == 200:
+        print(f"Time set successfully to {year}-{month:02d}-{day:02d} {hour:02d}:{minute:02d}:{second:02d}")
+    else:
+        print(f"Failed to set time. Status code: {response.status_code}")
+
+# Example usage
+set_stellarium_time(2025, 1, 11, 21, 0, 0)
+~~~
+
 #Q: Could you write a function that takes in camera FoV and resolution and outputs the angle differences (one up/down & one left/right) per pixel?  For instance, if I give it the camera FoV parameters and an (x,y) pixel position, it should return angle horizontal and angle vertical from the center of the image (where I'm assuming the camera vector will be pointing at).
 
 #Answer:  Here’s a Python function that calculates the angle differences (horizontal and vertical) for a given pixel position based on the camera's field of view (FoV) and resolution. This function assumes that the camera's center vector points at the center of the image:
