@@ -2,6 +2,7 @@
 to get the bounding boxes for light sources, the methods (2) that query Stellarium for any objects at those positions, etc.
 
 # Change the location of the observer in Stellarium using a Python script (must enable remote control API from the plugins menu):
+
 ~~~
 import requests
 # Define the base URL for the Stellarium API
@@ -30,7 +31,9 @@ if __name__ == "__main__":
     # Call the function to set the location
     set_location(latitude, longitude, altitude)
 ~~~
+
 -----------
+
 Change the observer camera vector in Stellarium:
 #Note:  0 altitude points at the horizon, 90 points straight up
 #Note2: 0 azimuth points north, 90 east, 180 south, 270 west, 360 back north
@@ -44,8 +47,10 @@ params = {"altAz": "[0.0001,0,1]"}   #This is actually x, y, and z from the equa
 response = requests.post(url, data=params)
 print("View set:", response.status_code)
 ~~~
+
 -----------
-#Set the datetime in Stellarium for the observer (Stellarium uses Julian calendar):
+
+# Set the datetime in Stellarium for the observer (Stellarium uses Julian calendar):
 ~~~
 import requests
 
@@ -74,6 +79,44 @@ def set_stellarium_time(year, month, day, hour, minute, second):
 # Example usage
 set_stellarium_time(2025, 1, 11, 21, 0, 0)
 ~~~
+
+-------
+
+# Python script to have Stellarium to output an image with a filename prefix of datetime.lat_longitude.camera vector in x_y_z:
+~~~
+import requests
+from datetime import datetime
+
+def stellarium_screenshot(output_dir, date_time, lat, longitude, x, y, z, overwrite=True):
+    url = "http://localhost:8090/api/main/view"
+    
+    # Format the filename prefix
+    formatted_datetime = date_time.strftime("%Y%m%d_%H%M%S")
+    formatted_lat = f"{lat:.4f}".replace('-', 'S').replace('+', 'N')
+    formatted_long = f"{longitude:.4f}".replace('-', 'W').replace('+', 'E')
+    formatted_vector = f"{x:.4f}_{y:.4f}_{z:.4f}"
+    
+    filename_prefix = f"{formatted_datetime}.{formatted_lat}_{formatted_long}.{formatted_vector}_"
+    
+    params = {
+        "action": "screenshot",
+        "dir": output_dir,
+        "prefix": filename_prefix,
+        "overwrite": str(overwrite).lower()
+    }
+    
+    response = requests.post(url, data=params)
+    
+    if response.status_code == 200:
+        print(f"Screenshot saved to {output_dir} with prefix {filename_prefix}")
+    else:
+        print(f"Failed to save screenshot. Status code: {response.status_code}")
+
+# Example usage:
+# current_time = datetime.now()
+# stellarium_screenshot("/path/to/output", current_time, 51.5074, -0.1278, 0.0001, 0, 1)
+~~~
+-------------
 
 #Q: Could you write a function that takes in camera FoV and resolution and outputs the angle differences (one up/down & one left/right) per pixel?  For instance, if I give it the camera FoV parameters and an (x,y) pixel position, it should return angle horizontal and angle vertical from the center of the image (where I'm assuming the camera vector will be pointing at).
 
