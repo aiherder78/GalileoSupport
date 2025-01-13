@@ -314,5 +314,4 @@ It's about time for me to check the post office for whether the Botango servo co
 - Picked up the Bottango servo shield from the post office.
 - Finally got around to / ordered a RPi Zero 2 WH (the H stands for pre-soldered GPIO headers), RPi 2 kit, jumpers, and power adapter.
 -Queried Perplexity some more and added a notes file with initial code to use with the RPi in order to direct the Bottango on what positions to set the servos to / how to power the servos off:
-
 Servo Control Python functions.txt
