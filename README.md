@@ -307,3 +307,8 @@ The reason for this is that if I do it right, it might allow me to see into the 
 
 Right now, I'm sort of aiming at using a DETR with the difference of gaussians instead of a CNN.  I'm probably going to have to change it to a pure transformer later...maybe.  I'm not sure yet.
 It's about time for me to check the post office for whether the Botango servo control board has arrived yet.  I'll do that either tonight or tomorrow.  I remembered that I already have an Arduino-like board sitting around, might try to use that initially, directly connected to my computer.
+
+---------- Update Monday, Jan 13th, 2025 ------------
+Finally got around to / ordered a RPi Zero 2 WH (the H stands for pre-soldered GPIO headers), RPi 2 kit, jumpers, and power adapter.
+Queried Perplexity some more and added a notes file with initial code to use with the RPi in order to direct the Bottango on what positions to set the servos to / how to power the servos off:
+Servo Control Python functions.txt
