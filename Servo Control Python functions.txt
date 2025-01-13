@@ -1,1 +1,66 @@
+Turn off a servo motor:
 
+---------------------------------
+import smbus
+import time
+
+# Initialize I2C bus
+bus = smbus.SMBus(1)  # Use 1 for newer Raspberry Pi models
+
+# Bottango servo shield I2C address (typically 0x40)
+SHIELD_ADDRESS = 0x40
+
+def turn_off_motor(channel):
+    """
+    Turn off the motor on the specified channel by setting it to NOT_LIVE.
+    
+    Parameters:
+    channel (int): The channel number of the motor to turn off (0-11).
+    """
+    # Send command to set the motor state to NOT_LIVE
+    # Assuming NOT_LIVE is represented by a specific command, e.g., 0x00
+    bus.write_byte_data(SHIELD_ADDRESS, channel, 0x00)  # Replace 0x00 with actual command if different
+
+# Example usage
+if __name__ == "__main__":
+    try:
+        # Turn off motor on channel 0
+        turn_off_motor(0)
+        print("Motor on channel 0 turned off.")
+        
+        # Optionally wait before turning off another motor
+        time.sleep(1)
+        
+        # Turn off motor on channel 1
+        turn_off_motor(1)
+        print("Motor on channel 1 turned off.")
+        
+    except Exception as e:
+        print(f"An error occurred: {e}")
+--------------
+
+Tell the Bottango servo shield to change a servo's angle.
+It will maintain that angle with constant pulse width modulation signals until the motor is powered off.
+If I use resting positions, I will likely need a series of these commands for the servo to raise the
+pan-tilt above the holder, move over above the holding position, and then drop down into it.
+It will need some wait time for each movement before calling the next.
+
+--------------
+import smbus
+import time
+
+# Initialize I2C bus
+bus = smbus.SMBus(1)  # Use 1 for newer Raspberry Pi models, 0 for older ones
+
+# Bottango servo shield I2C address (typically 0x40)
+SHIELD_ADDRESS = 0x40
+
+# Function to set servo position
+def set_servo(channel, angle):
+    pulse = int(angle * 2.5 + 150)  # Convert angle to pulse width
+    bus.write_word_data(SHIELD_ADDRESS, 0x06 + 4 * channel, 0)
+    bus.write_word_data(SHIELD_ADDRESS, 0x08 + 4 * channel, pulse)
+
+# Control two servos simultaneously
+set_servo(0, 90)  # Set servo on channel 0 to 90 degrees
+set_servo(1, 45)  # Set servo on channel 1 to 45 degrees
