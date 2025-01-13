@@ -301,6 +301,7 @@ Should be here in about a week.  In the meantime, I'm going to prepare my next p
 Update - another thread with Perplexity starting with a tiny bit more discussion around GANs but then moving on using DETR (visual transformer with a CNN backbone).  Uploading that now.
 
 ----- Update Sunday Jan 12, 2025 -----
+
 Added the draft notes, "Stellarium images and object name retrieval draft notes and code.txt" last night.
 It contains a draft process - probably almost everything needed to autonomously gather the images and requery Stellarium after doing difference of gaussians on them for potential objects.  It needs maybe a tiny bit more as far as how to arrange the dataset.  I'm exploring using docker with headless Stellarium now - I was asking questions of Perplexity on that.  Basically, I might explore having a VNC server with Stellarium GUI going to a xvfb (virtual framebuffer), then connecting to it from the host.
 The reason for this is that if I do it right, it might allow me to see into the training process.  For instance, if I have Stellarium time frozen so that all the queries go to the same exact second, then when I do the training loop, I could possibly have the transformer add its predictions on top of the same virtual framebuffer and be able to see it training live using the VNC client.
@@ -310,6 +311,7 @@ It's about time for me to check the post office for whether the Botango servo co
 
 ---------- Update Monday, Jan 13th, 2025 ------------
 
+- Picked up the Bottango servo shield from the post office.
 Finally got around to / ordered a RPi Zero 2 WH (the H stands for pre-soldered GPIO headers), RPi 2 kit, jumpers, and power adapter.
 Queried Perplexity some more and added a notes file with initial code to use with the RPi in order to direct the Bottango on what positions to set the servos to / how to power the servos off:
 Servo Control Python functions.txt
