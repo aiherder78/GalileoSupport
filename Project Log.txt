@@ -315,3 +315,6 @@ It's about time for me to check the post office for whether the Botango servo co
 - Finally got around to / ordered a RPi Zero 2 WH (the H stands for pre-soldered GPIO headers), RPi 2 kit, jumpers, and power adapter.
 -Queried Perplexity some more and added a notes file with initial code to use with the RPi in order to direct the Bottango on what positions to set the servos to / how to power the servos off:
 "Servo Control Python functions.txt"
+
+----------- Update Saturday, Feb 1, 2025 --------------
+Still waiting for final parts to come in (got a late set of orders done maybe a week ago - 14 gauge jumper wires with clips & a 5 megapixel noir (no IR filter) camera module and wire link for the RPi Zero).  They should be here in no more than another week.  Then will be the hard part (for me) which will involve keeping everything organized / not lost while I attempt to put everything together.  If I mess this up severely, I plan to pay someone to help me and I'll try again with them.
