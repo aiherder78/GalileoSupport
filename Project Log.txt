@@ -318,3 +318,51 @@ It's about time for me to check the post office for whether the Botango servo co
 
 ----------- Update Saturday, Feb 1, 2025 --------------
 Still waiting for final parts to come in (got a late set of orders done maybe a week ago - 14 gauge jumper wires with clips & a 5 megapixel noir (no IR filter) camera module and wire link for the RPi Zero).  They should be here in no more than another week.  Then will be the hard part (for me) which will involve keeping everything organized / not lost while I attempt to put everything together.  If I mess this up severely, I plan to pay someone to help me and I'll try again with them.
+
+------------ Update Thursday, Feb 6, 2025 --------------
+I finally had all the parts I needed, probably could have gotten to work earlier, but I procrastinated until yesteray.  I just finished (end of yesterday) putting together the pan-tilt kit.  
+Here is a link to the kit I bought from Amazon:  
+https://www.amazon.com/Yahboom-Pan-Tilt-Electric-Platform-Accessories/dp/B0BRXVFCKX/
+The description is:  "Yahboom 2-DOF Servo Pan-Tilt Kit for DIY Robot, Electric Platform with Metal Servo, Accessories for Camera or Robot Arms Bracket (2DOF metal servo without control board)"
+
+Now I just need to hook the wires from the servo motors into the Bottango servo control board and then jumper the RPi zero to the board and figure out how to do the control signals.
+
+Other parts I ordered:
+1.  The Bottango servo shield.  That came from a small supplier, the guy designed it himself.
+https://www.bottango.com/products/bottango-servo-shield  ($19.50)
+(I got this because I figured I'd need more power than I can route directly through the Raspberry Pi from that computer's IO headers, there's probably another way to rig it if I were much more skilled, but I'm not)
+
+The servo shield doesn't come with a power adapter.  I was unable to find it directly through search on Amazon, so asked the Bottango guy for help - here's what he said he'd heard others had luck in the past with:
+https://www.amazon.com/dp/B078RT3ZPS
+
+2.  RPi Zero and associated parts:
+RPi Zero WH:  https://www.amazon.com/dp/B0DB2JBD9C  I don't remember the specifics on the WH part of the name, but one of those letters means that it comes with presoldered headers for jumper cables.  The more that's ready to go, the faster I can get done with this part of the project.  Since I'm not the greatest mechanically, I opted for it.  It also has onboard wifi, which will be important for me since I'll have it outside in the all-weather enclosure.  (it says currently unavailable - I think it was around $10, not sure)
+
+RPi power adapter:  https://www.amazon.com/dp/B00MARDJZ4  ($9.95)
+
+"Official RPi Zero case":  https://www.amazon.com/dp/B06Y593MHV  The size is right and it has slots for all the adapters and the IO pins on top too.  The only complaint I have is that the shapes for the adapter holes aren't quite right.  We'll see how much of a problem it is (might not be).  ($7.49)
+
+128 GB microSD (tiny storage that plugs into the RPi Zero / holds the operating system that it runs on): https://www.amazon.com/dp/B0B7NTY2S6  ($13.62)
+
+microSD to USB A adapter (so I can download the operating system for the RPi Zero from my computer then plug this in to the computer's USB A ports and then burn the operating system onto the microSD card):
+https://www.amazon.com/dp/B06ZYXR7DL  ($7.99)
+
+3.  Bottango-RPi Zero hookup wire / other:
+14 gauge jumper wire with alligator clips:  https://www.amazon.com/dp/B083K78136 ($7.89)
+Thinner jumper cables:  https://www.amazon.com/dp/B0CQMRW77H  (female to female ends)  ($6.74)
+I imagine I'll use the thicker 14 gauge wires for power (there's something I have to do to make sure the negative goes through the RPi so that the control signals work if I remember correctly from all the reading I did...I hope I don't just smoke it all)...and the thinner wires will be logic signals.
+
+4.  All weather camera enclosure:
+https://www.amazon.com/dp/B09F8XWJKL ($29.99)
+
+5.  Thermal camera related:
+https://www.amazon.com/dp/B0BRCMGJS3  USB power and signal extender (allows you to connect more wires to put it out further - using these for my two thermal cameras...might not need them though once the RPi and Bottango are hooked up as those will be extensions in a way).  ($9.36)
+https://www.amazon.com/dp/B0BPCBP15P  USB A to USB C adapter / connector (my desktop computer has USB A ports and the thermal cameras are USB C - USB A has a rectangular hole and USB C is more oval / newer).
+($6.99)
+P2 Pro thermal camera:  https://www.amazon.com/dp/B0DBH1PY5J   ($299)
+(and now you know why I'm going to so much trouble to protect them / have an automatic sun-avoidance system - both together is a total of around $510 + tax and shipping)
+It says it's for Amazon, but as long as you have the adapters to go from USB C to whatever your computer has (some more recent computers already have this), then you can use the Python code in this repo to stream video to your computer (and probably you could use other apps as well, but I need to be able to do programming of various kinds to the streams / with the frames).
+
+https://www.amazon.com/dp/B0C23Z42KX TOPDON TC001.  ($209.99)
+
+I need to find the low light 5MP (no IR filter camera) I bought.  When it comes in I'll add a link because I've already forgotten the exact company and it wasn't from Amazon.
