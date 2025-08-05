@@ -1,6 +1,8 @@
 #https://grok.com/share/bGVnYWN5_bc31de05-bb45-4431-bb0b-e87df86d8e48 (LOL about the plasma balls - we can take that stuff out if desired)
-#https://sci-hub.ru/10.1049/ip-rsn:19990322
-#https://youtu.be/fLjDDS6m9Cs
+#https://sci-hub.ru/10.1049/ip-rsn:19990322 (the paper Mitch Randall referred to in one of the interviews - I'm not in any way a radar expert,
+#   and I have not physically implemented yet - I will have to buy another SDR since mine is single channel before I can get one running).
+#https://youtu.be/fLjDDS6m9Cs (interview of Mitch Randall about his proposed system)
+#https://hackaday.com/2015/06/05/building-your-own-sdr-based-passive-radar-on-a-shoestring/
 
 #Remember to install the dependencies:
 #sudo apt-get install gnuradio
