@@ -3,14 +3,17 @@ you have all the files necessary to build the image and run the container (Stell
 makes the API available to the local / host machine, which is what we will use to get the training images
 for the visual transformer star/planet/moon filter).
 
-1.  Docker must be installed on your machine of course.
+Docker must be installed on your machine of course.
 Commands:
-a.  docker build -t stellarium-headless .
-b.  docker run -d -p 8090:8090 --name stellarium stellarium-headless
+
+1.  docker build -t stellarium-headless .
+2.  docker run -d -p 8090:8090 --name stellarium stellarium-headless
 
 The API should now be available to the image gathering scripts, on local port 8090.
 You can now do a basic curl command test to see that the API is indeed available:
-c.  curl http://localhost:8090/api/main/status
+
+3.  curl http://localhost:8090/api/main/status
 
 In order to see more detailed information on container startup:
-d.  docker logs stellarium
+
+4.  docker logs stellarium
