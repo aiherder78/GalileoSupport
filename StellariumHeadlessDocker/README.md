@@ -11,3 +11,6 @@ b.  docker run -d -p 8090:8090 --name stellarium stellarium-headless
 The API should now be available to the image gathering scripts, on local port 8090.
 You can now do a basic curl command test to see that the API is indeed available:
 c.  curl http://localhost:8090/api/main/status
+
+In order to see more detailed information on container startup:
+d.  docker logs stellarium
