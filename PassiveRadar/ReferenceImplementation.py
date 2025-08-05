@@ -1,4 +1,5 @@
 #https://grok.com/share/bGVnYWN5_bc31de05-bb45-4431-bb0b-e87df86d8e48 (LOL about the plasma balls - we can take that stuff out if desired)
+#https://grok.com/chat/fecf3784-2e79-4d1e-ae33-018098944629 Code rundown.
 #https://sci-hub.ru/10.1049/ip-rsn:19990322 (the paper Mitch Randall referred to in one of the interviews - I'm not in any way a radar expert,
 #   and I have not physically implemented yet - I will have to buy another SDR since mine is single channel before I can get one running).
 #https://youtu.be/fLjDDS6m9Cs (interview of Mitch Randall about his proposed system)
