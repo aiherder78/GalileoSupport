@@ -3,6 +3,9 @@
 #   and I have not physically implemented yet - I will have to buy another SDR since mine is single channel before I can get one running).
 #https://youtu.be/fLjDDS6m9Cs (interview of Mitch Randall about his proposed system)
 #https://hackaday.com/2015/06/05/building-your-own-sdr-based-passive-radar-on-a-shoestring/
+#https://www.nicap.org/CATEGORIES/09-RADAR_Cases/MUFONPresentation.pdf Paper by Peter Davenport talking about passive radar - Mitch Randall
+#   mentioned him as his inspiration.  Peter Davenport runs NUFORC (National UFO Reporting Center) now, an org non-military can all report
+#   sightings to, mostly gets US-based reporting.
 
 #Remember to install the dependencies:
 #sudo apt-get install gnuradio
