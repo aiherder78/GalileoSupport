@@ -1,3 +1,6 @@
+#https://grok.com/share/bGVnYWN5_bc31de05-bb45-4431-bb0b-e87df86d8e48 (LOL about the plasma balls - we can take that stuff out if desired)
+#https://sci-hub.ru/10.1049/ip-rsn:19990322
+#https://youtu.be/fLjDDS6m9Cs
 import numpy as np
 from scipy import signal
 from scipy.fft import fft, fftfreq
